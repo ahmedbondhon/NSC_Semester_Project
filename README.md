@@ -18,11 +18,11 @@
 * Ensure total transparency and secure vote counting[cite: 37].
 
 ##  Tools & Technologies
-* *Programming Language:** Python [cite: 39]
-* *Web Framework:** Flask [cite: 39]
-* *Cryptography:** RSA, SHA-256 [cite: 39]
-* *Libraries:** `hashlib`, `cryptography`, `python-dotenv` [cite: 39]
-* *Frontend:** HTML5, CSS3, JavaScript
+* **Programming Language:** Python [cite: 39]
+* **Web Framework:** Flask [cite: 39]
+* **Cryptography:** RSA, SHA-256 [cite: 39]
+* **Libraries:** `hashlib`, `cryptography`, `python-dotenv` [cite: 39]
+* **Frontend:** HTML5, CSS3, JavaScript
 
 ##  Project Structure
 ```text
@@ -48,6 +48,9 @@ e-voting-system/
 └── static/                # Static assets (CSS/JS)
     ├── css/style.css      
     └── js/main.js
+## 
+
+
 
 
 Installation & Setup
