@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voter Management | Immutable Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#bfc8ca",
+              "outline-variant": "#40484a",
+              "inverse-primary": "#00696e",
+              "on-tertiary-container": "#63c664",
+              "surface-container-lowest": "#090f15",
+              "on-secondary-fixed": "#001f25",
+              "on-primary-container": "#37c2ca",
+              "inverse-on-surface": "#2b3138",
+              "surface": "#0e141a",
+              "surface-container-high": "#252b31",
+              "error-container": "#93000a",
+              "surface-variant": "#2f353c",
+              "on-background": "#dde3ec",
+              "tertiary": "#78dc77",
+              "on-primary": "#003739",
+              "on-primary-fixed": "#002022",
+              "on-tertiary": "#00390a",
+              "secondary": "#96d0de",
+              "secondary-fixed-dim": "#96d0de",
+              "primary-fixed": "#75f5fd",
+              "on-tertiary-fixed": "#002204",
+              "tertiary-fixed-dim": "#78dc77",
+              "surface-container-highest": "#2f353c",
+              "error": "#ffb4ab",
+              "surface-container-low": "#161c22",
+              "secondary-container": "#0b505d",
+              "outline": "#8a9295",
+              "on-primary-fixed-variant": "#004f53",
+              "background": "#0e141a",
+              "tertiary-container": "#005012",
+              "tertiary-fixed": "#94f990",
+              "on-surface": "#dde3ec",
+              "on-error": "#690005",
+              "surface-bright": "#343a41",
+              "primary-fixed-dim": "#55d8e1",
+              "on-secondary": "#00363f",
+              "on-error-container": "#ffdad6",
+              "inverse-surface": "#dde3ec",
+              "primary": "#55d8e1",
+              "secondary-fixed": "#b2ecfa",
+              "on-tertiary-fixed-variant": "#005313",
+              "surface-container": "#1a2027",
+              "surface-dim": "#0e141a",
+              "primary-container": "#004c50",
+              "on-secondary-container": "#88c1cf",
+              "surface-tint": "#55d8e1",
+              "on-secondary-fixed-variant": "#064e5a"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        background-color: rgba(47, 53, 60, 0.6);
+      }
+      body {
+        background-color: #0e141a;
+        color: #dde3ec;
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-slate-900/60 backdrop-blur-xl z-50 shadow-2xl shadow-cyan-900/20">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-cyan-400 cursor-pointer">menu</span>
+<h1 class="text-xl font-extrabold tracking-tighter text-cyan-400 font-manrope">Immutable Ledger</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-label uppercase tracking-widest text-on-surface-variant hidden md:block">Architect Mode</span>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-sm text-primary">person</span>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer -->
+<aside class="h-full w-72 fixed left-0 top-0 z-40 bg-slate-900 flex flex-col py-8 px-4 transition-all duration-300 ease-in-out border-r border-slate-800/50 hidden md:flex">
+<div class="mt-12 mb-10 px-4">
+<h2 class="text-cyan-500 font-bold text-xs uppercase tracking-[0.2em] font-manrope">Architect Menu</h2>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/40 transition-all font-manrope uppercase tracking-widest text-xs" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-cyan-500/10 text-cyan-400 border-r-2 border-cyan-500 transition-all font-manrope uppercase tracking-widest text-xs" href="#">
+<span class="material-symbols-outlined">how_to_reg</span>
+                Voter Registry
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/40 transition-all font-manrope uppercase tracking-widest text-xs" href="#">
+<span class="material-symbols-outlined">groups</span>
+                Candidate List
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/40 transition-all font-manrope uppercase tracking-widest text-xs" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+                Blockchain Log
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-slate-800/40 transition-all font-manrope uppercase tracking-widest text-xs" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 pt-24 pb-20 px-6 lg:px-12">
+<div class="max-w-6xl mx-auto space-y-12">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-2">
+<span class="text-primary font-label text-xs uppercase tracking-[0.3em]">Identity Management</span>
+<h2 class="text-4xl md:text-5xl font-extrabold font-headline tracking-tight">Voter Registry</h2>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-low px-6 py-3 rounded-xl">
+<span class="block text-[10px] text-on-surface-variant uppercase tracking-widest">Active nodes</span>
+<span class="text-xl font-bold font-headline text-tertiary">14,202</span>
+</div>
+</div>
+</div>
+<!-- Bento Layout for Forms and Messaging -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Registration Form Card -->
+<section class="lg:col-span-5 bg-surface-container rounded-xl p-6 shadow-2xl shadow-black/40">
+<h3 class="text-lg font-bold font-headline mb-6 text-on-surface">Register New Voter</h3>
+<form class="space-y-5">
+<div class="space-y-2">
+<label class="block text-[10px] uppercase tracking-widest text-on-surface-variant font-semibold">Full Legal Name</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg py-3 px-4 text-on-surface placeholder:text-slate-600 focus:ring-1 focus:ring-primary transition-all" placeholder="e.g. Alexander Sterling" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-[10px] uppercase tracking-widest text-on-surface-variant font-semibold">Voter ID / Digital Signature</label>
+<input class="w-full bg-surface-container-lowest border-none rounded-lg py-3 px-4 text-on-surface placeholder:text-slate-600 focus:ring-1 focus:ring-primary transition-all" placeholder="VTR-8829-PX-001" type="text"/>
+</div>
+<div class="pt-4">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold py-3.5 rounded-xl hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-cyan-900/30" type="submit">
+                                Commit to Ledger
+                            </button>
+</div>
+</form>
+</section>
+<!-- Status & Confirmation Placeholder -->
+<section class="lg:col-span-7 flex flex-col gap-6">
+<div class="bg-surface-container-low rounded-xl p-8 flex-1 flex flex-col justify-center relative overflow-hidden group">
+<!-- Background Accent -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-tertiary/5 rounded-full blur-3xl group-hover:bg-tertiary/10 transition-colors"></div>
+<div class="flex items-start gap-6 relative z-10">
+<div class="w-12 h-12 bg-tertiary-container/30 rounded-full flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<div class="space-y-2">
+<h4 class="text-xl font-bold font-headline">Registry Status</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-md">
+                                    All new registrations are processed through the <span class="text-primary">primary validation node</span>. Successful entries will appear in the registry log below after a 2-second block confirmation.
+                                </p>
+</div>
+</div>
+<!-- Confirmation Message Placeholder (Shown upon action) -->
+<div class="mt-8 p-4 bg-tertiary/10 border border-tertiary/20 rounded-lg flex items-center gap-3 animate-pulse">
+<span class="material-symbols-outlined text-tertiary text-sm">check_circle</span>
+<span class="text-tertiary font-label text-xs uppercase tracking-widest font-bold">Awaiting Transaction...</span>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl p-6 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-error-container/20 rounded-full flex items-center justify-center text-error">
+<span class="material-symbols-outlined">security_update_warning</span>
+</div>
+<span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Admin override active</span>
+</div>
+<span class="material-symbols-outlined text-slate-600">info</span>
+</div>
+</section>
+</div>
+<!-- Modern Data Table -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold font-headline">Registered Entities</h3>
+<div class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-lg">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">search</span>
+<input class="bg-transparent border-none text-xs focus:ring-0 p-0 w-32 md:w-48 placeholder:text-slate-600" placeholder="Filter log..." type="text"/>
+</div>
+</div>
+<div class="overflow-hidden rounded-xl bg-surface-container shadow-2xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high">
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">Voter Identity</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">Access Hash</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant">Status</th>
+<th class="px-6 py-4 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-primary">JD</div>
+<div>
+<div class="text-sm font-bold text-on-surface">Julianna Drumm</div>
+<div class="text-[10px] text-slate-500 font-mono tracking-tighter">Registered 2m ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-mono text-cyan-400/80 tracking-widest bg-cyan-950/20 px-2 py-1 rounded">VTR-8821-X9</span>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                        Verified
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-error/40 hover:text-error transition-colors p-2 rounded-lg hover:bg-error/10">
+<span class="material-symbols-outlined text-lg">delete_sweep</span>
+</button>
+</td>
+</tr>
+<tr class="bg-surface-container-low hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-primary">RK</div>
+<div>
+<div class="text-sm font-bold text-on-surface">Raymond Kallis</div>
+<div class="text-[10px] text-slate-500 font-mono tracking-tighter">Registered 1h ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-mono text-cyan-400/80 tracking-widest bg-cyan-950/20 px-2 py-1 rounded">VTR-9002-L4</span>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                                        Verified
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-error/40 hover:text-error transition-colors p-2 rounded-lg hover:bg-error/10">
+<span class="material-symbols-outlined text-lg">delete_sweep</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-primary">MM</div>
+<div>
+<div class="text-sm font-bold text-on-surface">Marcus Moretti</div>
+<div class="text-[10px] text-slate-500 font-mono tracking-tighter">Registered 4h ago</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="text-xs font-mono text-cyan-400/80 tracking-widest bg-cyan-950/20 px-2 py-1 rounded">VTR-1192-K0</span>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                        Pending
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="text-error/40 hover:text-error transition-colors p-2 rounded-lg hover:bg-error/10">
+<span class="material-symbols-outlined text-lg">delete_sweep</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center h-16 px-2 z-50 bg-slate-900/80 backdrop-blur-lg border-t border-slate-800 lg:hidden">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-semibold font-inter">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-cyan-400 bg-cyan-950/40 rounded-xl px-4 py-1 scale-110">
+<span class="material-symbols-outlined">ballot</span>
+<span class="text-[10px] font-semibold font-inter">Vote</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="text-[10px] font-semibold font-inter">Log</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-semibold font-inter">Profile</span>
+</button>
+</nav>
+</body></html>
