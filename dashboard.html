@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Election Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>Live Election Dashboard</h2>
+            <a href="index.html" style="text-decoration: none; color: var(--color-text-secondary); font-weight: 500;">Back to Home</a>
+        </nav>
+
+        <p>Welcome to the public explorer. The blockchain is entirely transparent and immutable.</p>
+
+        <!-- Result Tally -->
+        <div class="results-section">
+            <h2>Current Tally</h2>
+            <div class="tally-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="tally-a">145</div>
+                    <div class="stat-label">Candidate A</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="tally-b">89</div>
+                    <div class="stat-label">Candidate B</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="tally-c">212</div>
+                    <div class="stat-label">Candidate C</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="total-votes" style="color: var(--color-off-white);">446</div>
+                    <div class="stat-label">Total Votes Verified</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blockchain Explorer -->
+        <div class="blockchain-explorer">
+            <div class="explorer-header">
+                <h2>Blockchain Ledger</h2>
+                <div class="explorer-status">
+                    <div class="status-dot"></div>
+                    Node Synced (Block 446)
+                </div>
+            </div>
+
+            <!-- Scrollable Blockchain Feed -->
+            <div id="blockchain-feed">
+                <!-- Example Block -->
+                <div class="block">
+                    <div class="block-header">Block #446</div>
+                    <div class="block-detail">
+                        <span class="label">Block Hash:</span>
+                        <span class="hash-value">0042a1f0985cde64839...df2bd3c5</span>
+                    </div>
+                    <div class="block-detail">
+                        <span class="label">Previous Hash:</span>
+                        <span class="hash-value">00efa678d10bbc82942...9cc31dea</span>
+                    </div>
+                    <div class="block-detail">
+                        <span class="label">Timestamp:</span>
+                        <span>2026-04-01 18:14:02 UTC</span>
+                    </div>
+                    <div class="block-transactions">
+                        <div class="transaction-item">Vote Cast by VoterID: <span style="color:var(--color-accent)">a12f3b9...</span> -> Candidate C</div>
+                    </div>
+                </div>
+                
+                <!-- Example Genesis Block -->
+                <div class="block">
+                    <div class="block-header">Block #0 (Genesis)</div>
+                    <div class="block-detail">
+                        <span class="label">Block Hash:</span>
+                        <span class="hash-value">0000000000000000000...00000000</span>
+                    </div>
+                    <div class="block-detail">
+                        <span class="label">Previous Hash:</span>
+                        <span class="hash-value">N/A</span>
+                    </div>
+                    <div class="block-transactions">
+                        <div class="transaction-item" style="color: var(--color-text-secondary);">System Initialization</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

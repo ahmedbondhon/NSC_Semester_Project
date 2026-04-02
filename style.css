@@ -1,0 +1,299 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* CSS Variables */
+:root {
+    /* Color Palette - Neon Cyberpunk Theme */
+    --color-navy: #0e141a; /* Very dark navy blue */
+    --color-navy-light: #18222c; /* Slightly lighter for elements */
+    --color-navy-dark: #060a0d;
+    --color-off-white: #eef2f6; /* Brighter for maximum legibility */
+    --color-white: #ffffff;
+    --color-accent: #55d8e1; /* Bright cyan/turquoise */
+    --color-border: #233443;
+    
+    /* Terminal Colors */
+    --color-terminal-bg: #060a0d;
+    --color-terminal-text: #78dc77; /* Lime green */
+    
+    /* Text Colors */
+    --color-text-primary: #f0f4f8; /* Brighter, almost white */
+    --color-text-secondary: #a8b8c5; /* Clearer light gray/blue */
+    
+    /* Typography */
+    --font-heading: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+    
+    /* Layout & Styling */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --box-shadow: 0 4px 15px rgba(85, 216, 225, 0.05);
+    --box-shadow-hover: 0 0 20px rgba(85, 216, 225, 0.2);
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    font-size: 1.1rem; /* Bumping base font size slightly for Rajdhani's tall x-height */
+    background-color: var(--color-navy);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(85, 216, 225, 0.3);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Candidate Cards Section */
+.candidates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.candidate-card {
+    background-color: var(--color-navy-light);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.candidate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+    border-color: var(--color-accent);
+}
+
+.candidate-card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--color-accent);
+    text-shadow: none;
+}
+
+.candidate-card .description {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.btn-vote {
+    background-color: transparent;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--border-radius-md);
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(85, 216, 225, 0.1);
+}
+
+.btn-vote:hover {
+    background-color: var(--color-accent);
+    color: var(--color-navy-dark);
+    box-shadow: 0 0 20px rgba(85, 216, 225, 0.5);
+}
+
+.btn-vote:active {
+    background-color: var(--color-accent);
+    transform: scale(0.98);
+}
+
+/* Terminal-style Blockchain Explorer */
+.blockchain-explorer {
+    background-color: var(--color-terminal-bg);
+    border-radius: var(--border-radius-md);
+    padding: 2rem;
+    margin-top: 4rem;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);
+    overflow-x: auto;
+}
+
+.explorer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.explorer-header h2 {
+    color: var(--color-white);
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+}
+
+.explorer-status {
+    color: var(--color-terminal-text);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-terminal-text);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { opacity: 0.5; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Block Style in Terminal */
+.block {
+    border-left: 2px solid var(--color-terminal-text);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--font-mono);
+    position: relative;
+}
+
+.block::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-terminal-text);
+}
+
+.block-header {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+.block-detail {
+    color: #A3A3A3;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.block-detail .label {
+    color: var(--color-accent);
+    min-width: 140px;
+}
+
+.hash-value {
+    color: var(--color-terminal-text);
+    word-break: break-all;
+    letter-spacing: 0.5px;
+}
+
+.block-transactions {
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.transaction-item {
+    color: var(--color-white);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.transaction-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Result Tally Section */
+.results-section {
+    background-color: var(--color-navy-light);
+    color: var(--color-text-primary);
+    padding: 4rem 2rem;
+    border-radius: var(--border-radius-lg);
+    margin-top: 4rem;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--color-border);
+}
+
+.results-section h2 {
+    color: var(--color-accent);
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.tally-stats {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.stat-item {
+    text-align: center;
+    min-width: 150px;
+}
+
+.stat-value {
+    font-size: 3.5rem;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    color: var(--color-terminal-text);
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(120, 220, 119, 0.4);
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: var(--color-text-primary);
+    opacity: 0.9;
+    margin-top: 0.75rem;
+    font-weight: 500;
+}

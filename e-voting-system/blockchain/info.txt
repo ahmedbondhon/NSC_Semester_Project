@@ -1,7 +1,0 @@
-blockchain/block.py: This is where we define what a single "Block" looks like. In our case, a block will hold the voting data, a timestamp, the hash of the previous block, and its own unique SHA-256 hash.
-
-blockchain/blockchain.py: This file will manage the chain itself. It will handle creating the "Genesis Block" (the very first block), adding new blocks to the chain, and most importantly, validating the chain to ensure no one has tampered with the votes.
-
-blockchain/wallet.py: This will handle the cryptography side (RSA). It will generate the public/private key pairs for your voters so they can digitally sign their votes, proving who they are without revealing their actual identity.
-
-blockchain/__init__.py: This just tells Python to treat the blockchain folder as a module so we can easily import these files into our main app.py later.

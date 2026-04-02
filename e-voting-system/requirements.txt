@@ -1,8 +1,0 @@
-# Web Framework
-Flask==3.0.2
-
-# Cryptography (for RSA digital signatures)
-cryptography==42.0.5
-
-# Environment variable management
-python-dotenv==1.0.1

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cast Your Vote</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.85); /* Dark Navy overlay */
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal {
+            background: var(--color-white);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-lg);
+            max-width: 600px;
+            width: 90%;
+            text-align: left;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .modal h2 { margin-top: 0; }
+        .signature-preview {
+            background: var(--color-terminal-bg);
+            color: var(--color-terminal-text);
+            font-family: var(--font-mono);
+            padding: 1.25rem;
+            border-radius: var(--border-radius-md);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            word-break: break-all;
+            letter-spacing: 0.5px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        .btn-cancel {
+            background: transparent;
+            color: var(--color-navy);
+            border: 1px solid var(--color-navy);
+            border-radius: var(--border-radius-md);
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-cancel:hover {
+            background: var(--color-off-white);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h2>Election 2026</h2>
+            <a href="index.html" style="text-decoration: none; color: var(--color-text-secondary); font-weight: 500;">Sign Out</a>
+        </nav>
+
+        <h1>Select a Candidate</h1>
+        <p>Your vote will be cryptographically signed by your local private key and broadcasted securely to the blockchain.</p>
+
+        <div class="candidates-grid">
+            <div class="candidate-card">
+                <h3>Candidate A</h3>
+                <p class="description">Leading innovation and pushing boundaries in deep technology infrastructure and open-source models.</p>
+                <button class="btn-vote" onclick="showModal('Candidate A')">Select</button>
+            </div>
+            <div class="candidate-card">
+                <h3>Candidate B</h3>
+                <p class="description">Building robust institutional partnerships to enhance educational equity and public transparency.</p>
+                <button class="btn-vote" onclick="showModal('Candidate B')">Select</button>
+            </div>
+            <div class="candidate-card">
+                <h3>Candidate C</h3>
+                <p class="description">Prioritizing green energy initiatives and structural sustainability across local policies.</p>
+                <button class="btn-vote" onclick="showModal('Candidate C')">Select</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Signature Preview -->
+    <div class="modal-overlay" id="signatureModal">
+        <div class="modal">
+            <h2>Cryptographic Signing</h2>
+            <p>You are about to cryptographically sign your vote for <strong id="selectedCandidate" style="color: var(--color-navy);"></strong>. Review your signature below:</p>
+            
+            <div class="signature-preview" id="previewSignature">
+                <!-- Signature snippet preview populated via JS -->
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="hideModal()">Cancel</button>
+                <button class="btn-vote" onclick="submitVote()" style="width: auto;">Confirm & Cast Vote</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
