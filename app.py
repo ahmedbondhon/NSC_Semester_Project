@@ -61,17 +61,23 @@ def receive_vote():
     public_key_pem_str = req_data["public_key_pem"]
     signature_hex = req_data["signature"]
 
+    print(f"DEBUG: Received voter_id: {voter_id}")
+    print(f"DEBUG: Received public_key_pem_str (first 100 chars): {public_key_pem_str[:100]}")
+
     # 1. Decode the public key PEM
     public_key_pem_bytes = public_key_pem_str.encode('utf-8')
     try:
         public_key = Wallet.import_public_key_pem(public_key_pem_bytes)
     except Exception as e:
+        print(f"DEBUG: Failed to load public key: {e}")
         return jsonify({"error": f"Failed to load public key: {str(e)}"}), 400
 
     # 2. Re-calculate the expected voter_id from public key and ensure it matches
     expected_voter_id = Wallet(public_key=public_key).get_voter_id()
+    print(f"DEBUG: Calculated expected_voter_id: {expected_voter_id}")
+    print(f"DEBUG: Voter ID match: {voter_id == expected_voter_id}")
     if voter_id != expected_voter_id:
-        return jsonify({"error": "Voter ID does not match the provided public key."}), 400
+        return jsonify({"error": f"Voter ID does not match the provided public key. Received: {voter_id}, Expected: {expected_voter_id}"}), 400
 
     # 3. Decode the signature from hex
     try:
@@ -79,8 +85,12 @@ def receive_vote():
     except ValueError:
         return jsonify({"error": "Invalid signature format. Must be a hex string."}), 400
 
+    print(f"DEBUG: Signature hex (first 50): {signature_hex[:50]}")
+    print(f"DEBUG: Vote choice: {vote_choice}")
+
     # 4. Verify the cryptographic signature on the vote choice
     is_valid_sig = Wallet.verify_signature(public_key, vote_choice, signature_bytes)
+    print(f"DEBUG: Signature valid: {is_valid_sig}")
     if not is_valid_sig:
         return jsonify({"error": "Invalid signature. Cannot verify vote authenticity."}), 400
 

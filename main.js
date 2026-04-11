@@ -131,7 +131,9 @@ async function showModal(candidate) {
 
         const sigHex = buf2hex(signatureBuffer);
         document.getElementById('previewSignature').innerText = sigHex;
-        
+
+        console.log("DEBUG: Generated signature hex (first 50):", sigHex.substring(0, 50));
+
         // Save signature hex globally for form submission step
         window.currentSignatureHex = sigHex;
 
@@ -158,6 +160,9 @@ async function submitVote() {
         // Calculate voter ID locally utilizing sha256 to hash the exact public key string mapping to backend
         const strippedPem = storedPublicKeyPem.replace(/\s+/g, '');
         const voterId = await sha256(strippedPem);
+
+        console.log("DEBUG: Client voterId:", voterId);
+        console.log("DEBUG: Stripped PEM (first 100):", strippedPem.substring(0, 100));
 
         const payload = {
             voter_id: voterId,
